@@ -14,7 +14,9 @@ class Login extends CI_Controller
     public function index()
     {
 
+        $this->load->view('common/header');
         $this->load->view('auth/auth');
+        $this->load->view('common/footer');
 
     }
 
@@ -72,9 +74,9 @@ class Login extends CI_Controller
             print_r($this->input->post());
 
         } else {
-
-            echo form_error('user_name');
-
+            
+            $data= form_error('user_name')? form_error('user_name') : '';
+            return $data;
             exit;
 
             redirect(base_url('#toregister'));
