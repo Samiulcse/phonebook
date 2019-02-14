@@ -9,6 +9,7 @@
                 <div id="login" class="animate form">
                     <form  id="loginForm" autocomplete="on">
                         <h1>Log in</h1>
+                        <p class="text-denger text-center" id="login_error"></p>
                         <p>
                             <label for="lusername" class="uname" data-icon="u" > Your email or username </label>
                             <input id="lusername" name="username" required="required" type="text" placeholder="myusername or mymail@mail.com"/>
@@ -82,7 +83,7 @@ $(document).ready(function () {
             type : "POST",
             url  : "<?php echo base_url('login/register_user') ?>",
             dataType : "JSON",
-            data : {user_name:user_name,user_pass:user_pass,user_confirm_pass:user_confirm_pass},
+            data : {user_name:user_name,user_email:user_email,user_pass:user_pass,user_confirm_pass:user_confirm_pass},
             success: function(data){
             if($.isEmptyObject(data.error)){
                     $("#user_name_error").html("");
@@ -129,6 +130,7 @@ $(document).ready(function () {
                 }else{
                     $("#lusername_error").html(data.error.user_name);
                     $("#lpassword_error").html(data.error.user_pass);
+                    $("#login_error").html(data.error.login_error);
                     
                     console.log(data.error);
                 }
@@ -146,5 +148,9 @@ $(document).ready(function () {
         position: relative;
         left: 8%;
         top: 3px;
+    }
+    .text-center{
+        text-align:center;
+        left: 0 !important;
     }
 </style>

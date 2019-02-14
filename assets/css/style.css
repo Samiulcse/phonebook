@@ -1,0 +1,16 @@
+h2 {
+    font-size: 36px;
+}
+
+.mb-30 {
+    margin-bottom: 30px;
+}
+
+a.logout {
+    margin-right: 30px;
+}
+
+a {
+    outline: none;
+    border: none !important;
+}

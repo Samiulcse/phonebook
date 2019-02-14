@@ -19,7 +19,12 @@ class Login_model extends CI_Model
 
         $result = $this->db->select('*')->from('users')->where('user_name',$user_name)->where('user_pass',$user_pass)->get()->result();
 
-        return $result[0]->user_id;
+        if($result){
+            return $result[0]->user_id;
+        }else{
+            return false;
+        }
+        
     }
 
     // get current user information

@@ -21,6 +21,10 @@ class Phonebook extends CI_Controller
     }
 
     public function index(){
-        echo $this->session->userdata['user_name'];
+        $data['title'] = strtoupper($this->session->userdata['user_name'])."'s Phonebook";
+        
+        $this->load->view('common/header',$data);
+        $this->load->view('phonebook');
+        $this->load->view('common/footer');
     }
 }

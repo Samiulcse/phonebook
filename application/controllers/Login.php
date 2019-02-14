@@ -16,15 +16,25 @@ class Login extends CI_Controller
 
     private function have_session_user_data()
     {
-        if (isset($this->session->userdata['user_name']) && isset($this->session->userdata['user_email'])) {
+        $user_name = isset($this->session->userdata['user_name']) ? $this->session->userdata['user_name'] : '';
+
+        $user_email = isset($this->session->userdata['user_email']) ? $this->session->userdata['user_email'] : '';
+
+        if ($user_name == '' && $user_email == '') {
+            redirect(base_url());
+        }else{
+            echo $user_name;
+            exit;
             redirect(base_url('phonebook'));
-        } 
+            
+        }
     }
 
     public function index()
     {
+        $data['title'] = "User Login and Registration ";
 
-        $this->load->view('common/header');
+        $this->load->view('common/header', $data);
         $this->load->view('auth/auth');
         $this->load->view('common/footer');
 
@@ -58,12 +68,16 @@ class Login extends CI_Controller
             $user_name = $this->input->post('user_name');
             $user_pass = md5($this->input->post('user_pass'));
 
-            $user_id = $this->auth_model->can_login($user_name , $user_pass);
+            $user_id = $this->auth_model->can_login($user_name, $user_pass);
+
             if ($user_id) {
                 if ($this->set_session_data_user_info($user_id)) {
                     echo json_encode(['redirect' => base_url('phonebook')]);
                 }
-            } 
+            } else {
+                $error_message['login_error'] = "Username or Password didn't match";
+                echo json_encode(['error' => $error_message]);
+            }
 
         } else {
 
@@ -162,4 +176,19 @@ class Login extends CI_Controller
 
     }
 
+    // logout user
+
+    public function logout()
+    {
+
+        $session_data = array(
+            'user_name' => '',
+            'user_email' => '',
+            'user_id' => '',
+        );
+
+        $this->session->unset_userdata('user_name');
+
+        return redirect(base_url());
+    }
 }
