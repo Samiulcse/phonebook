@@ -10,24 +10,20 @@ class Login extends CI_Controller
 
         $this->load->model('Login_model', 'auth_model', true);
 
-        $this->have_session_user_data();
+        if ($this->uri->segment(2) == 'logout') {
+            $this->logout();
+        } else {
+            $this->have_session_user_data();
+        }
 
     }
 
     private function have_session_user_data()
     {
-        $user_name = isset($this->session->userdata['user_name']) ? $this->session->userdata['user_name'] : '';
-
-        $user_email = isset($this->session->userdata['user_email']) ? $this->session->userdata['user_email'] : '';
-
-        if ($user_name == '' && $user_email == '') {
-            redirect(base_url());
-        }else{
-            echo $user_name;
-            exit;
+        
+        if ($this->session->has_userdata('user_name') && $this->session->has_userdata('user_email')) {
             redirect(base_url('phonebook'));
-            
-        }
+        } 
     }
 
     public function index()
@@ -182,12 +178,12 @@ class Login extends CI_Controller
     {
 
         $session_data = array(
-            'user_name' => '',
-            'user_email' => '',
-            'user_id' => '',
+            'user_name',
+            'user_email',
+            'user_id',
         );
 
-        $this->session->unset_userdata('user_name');
+        $this->session->unset_userdata($session_data);
 
         return redirect(base_url());
     }
