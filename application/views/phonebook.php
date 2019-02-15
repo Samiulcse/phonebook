@@ -32,34 +32,35 @@
         <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add New Number</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
             <div class="modal-body">
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label">Product Code</label>
+                    <label class="col-md-2 col-form-label">Name</label>
                     <div class="col-md-10">
-                        <input type="text" name="product_code" id="product_code" class="form-control" placeholder="Product Code">
+                        <input type="text" name="phonebook_name" id="phonebooK_name" class="form-control" placeholder="Product Code">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label">Product Name</label>
+                    <label class="col-md-2 col-form-label">Phone Number</label>
                     <div class="col-md-10">
-                        <input type="text" name="product_name" id="product_name" class="form-control" placeholder="Product Name">
+                        <input type="number" name="phonebook_phone" id="phonebook_phone" class="form-control" placeholder="Product Name">
+                        <input type="hidden" name="phonebook_user_id" id="phonebook_user_id" value="<?php echo $this->session->userdata['user_id']?>">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label class="col-md-2 col-form-label">Price</label>
+                    <label class="col-md-2 col-form-label">Address</label>
                     <div class="col-md-10">
-                        <input type="text" name="price" id="price" class="form-control" placeholder="Price">
+                        <textarea name="phonebook_address" class="form-control" id="phonebook_address" rows="5"></textarea>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" type="submit" id="btn_save" class="btn btn-primary">Save</button>
+            <button type="button" id="btn_save" class="btn btn-primary">Save</button>
             </div>
         </div>
         </div>
@@ -132,3 +133,37 @@
     </div>
     </form>
 <!--END MODAL DELETE-->
+<script>
+$(document).ready(function () {
+    show_phonenumber();	//call function show all Phone Number
+		
+    $('#mydata').dataTable();
+        
+    //function show all product
+    function show_phonenumber(){
+        $.ajax({
+            type  : 'ajax',
+            url   : '<?php echo site_url('phonebook/phone_book_data')?>',
+            async : false,
+            dataType : 'json',
+            success : function(data){
+                var html = '';
+                var i;
+                for(i=0; i<data.length; i++){
+                    html += '<tr>'+
+                            '<td>'+data[i].product_code+'</td>'+
+                            '<td>'+data[i].product_name+'</td>'+
+                            '<td>'+data[i].product_price+'</td>'+
+                            '<td style="text-align:right;">'+
+                                '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-product_code="'+data[i].product_code+'" data-product_name="'+data[i].product_name+'" data-price="'+data[i].product_price+'">Edit</a>'+' '+
+                                '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-product_code="'+data[i].product_code+'">Delete</a>'+
+                            '</td>'+
+                            '</tr>';
+                }
+                $('#show_data').html(html);
+            }
+
+        });
+    }
+});
+</script>

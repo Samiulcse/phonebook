@@ -9,6 +9,8 @@ class Phonebook extends CI_Controller
 
         $this->have_session_user_data();
 
+        $this->load->model('Phonebook_model', 'p_model', true);
+
     }
 
      private function have_session_user_data()
@@ -27,4 +29,12 @@ class Phonebook extends CI_Controller
         $this->load->view('phonebook');
         $this->load->view('common/footer');
     }
+
+    // All Number data
+
+    function phone_book_data(){
+		$data=$this->p_model->product_list();
+		echo json_encode($data);
+    }
+    
 }

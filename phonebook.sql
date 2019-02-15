@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2019 at 12:26 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.3.1
+-- Generation Time: Feb 15, 2019 at 06:16 PM
+-- Server version: 10.1.26-MariaDB
+-- PHP Version: 7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `phonebook`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phonebooks`
+--
+
+CREATE TABLE `phonebooks` (
+  `phonebook_id` int(10) NOT NULL,
+  `phonebook_name` varchar(50) NOT NULL,
+  `phonebook_phone` int(11) NOT NULL,
+  `phonebook_address` text NOT NULL,
+  `phonebook_user_id` int(5) NOT NULL,
+  `phonebook_created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -41,11 +56,18 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_name`, `user_email`, `user_pass`, `created_at`) VALUES
-(1, 'samiul', 'samiul@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '2019-02-13 00:00:00');
+(1, 'admin', 'samiul@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '2019-02-15 21:38:48');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `phonebooks`
+--
+ALTER TABLE `phonebooks`
+  ADD PRIMARY KEY (`phonebook_id`),
+  ADD UNIQUE KEY `phonebook_phone` (`phonebook_phone`);
 
 --
 -- Indexes for table `users`
@@ -58,11 +80,15 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `phonebooks`
+--
+ALTER TABLE `phonebooks`
+  MODIFY `phonebook_id` int(10) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
