@@ -137,7 +137,7 @@ class Login extends CI_Controller
             $user_id = $this->auth_model->add_new_user($user_data);
             if ($user_id) {
                 if ($this->set_session_data_user_info($user_id)) {
-                    echo json_encode(['redirect' => base_url('phonebook')]);
+                    echo json_encode(array('redirect' => site_url('phonebook')));
                 }
             } else {
                 redirect(base_url());
