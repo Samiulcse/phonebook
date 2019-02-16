@@ -42,8 +42,6 @@ class Phonebook_model extends CI_Model
         $phonebook_id=$this->input->post('phonebook_id');
         $this->db->where('phonebook_id', $phonebook_id);
         $result=$this->db->delete('phonebooks');
-        echo $this->db->last_query();
-        exit;
         return $result;
     }
 

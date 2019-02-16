@@ -192,7 +192,7 @@
                             '<td class="text-left">' + data[i].phonebook_address + '</td>' +
                             '<td style="text-align:right;">' +
                             '<a href="javascript:void(0);" class="btn btn-info btn-sm item_edit" data-phonebook_name="' + data[i].phonebook_name + '" data-phonebook_id ="' + data[i].phonebook_id + '" data-phonebook_phone="' + data[i].phonebook_phone + '" data-phonebook_address="' + data[i].phonebook_address + '">Edit</a>' + ' ' +
-                            '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-product_code="' + data[i].product_code + '">Delete</a>' +
+                            '<a href="javascript:void(0);" class="btn btn-danger btn-sm item_delete" data-phonebook_id="' + data[i].phonebook_id + '">Delete</a>' +
                             '</td>' +
                             '</tr>';
                     }
