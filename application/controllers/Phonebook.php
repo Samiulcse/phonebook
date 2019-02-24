@@ -80,7 +80,6 @@ class Phonebook extends CI_Controller
 
         );
 
-
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run()) {
@@ -94,7 +93,12 @@ class Phonebook extends CI_Controller
 
             $data = $this->p_model->save_phone_number($data);
 
-            echo json_encode($data);
+            if($data){
+                $errors['common'] = 'Phone Number Already Exists';
+                echo json_encode(['error' => $errors]);
+            }else{
+                echo json_encode($data);
+            }
 
         } else {
             $errors['phonebook_name_error'] = form_error('phonebook_name') ? form_error('phonebook_name') : '';
@@ -102,7 +106,6 @@ class Phonebook extends CI_Controller
             $errors['phonebook_address_error'] = form_error('phonebook_address') ? form_error('phonebook_address') : '';
             echo json_encode(['error' => $errors]);
         }
-
 
     }
 
@@ -146,27 +149,36 @@ class Phonebook extends CI_Controller
 
         );
 
-
         $this->form_validation->set_rules($config);
 
         if ($this->form_validation->run()) {
 
-                $data = $this->p_model->update_phone_number();
+            $data=$this->p_model->phonenumber_list($this->input->post('phonebook_id'));
+            $phone_number = $data['phonebook_phone'];
+
+            $data = $this->p_model->update_phone_number($phone_number);
+            
+            if($data){
+                $errors['common'] = 'Phone Number Already Exists';
+                echo json_encode(['error' => $errors]);
+            }else{
                 echo json_encode($data);
+            }
 
         } else {
             $errors['phonebook_name_edit_error'] = form_error('phonebook_edit_name') ? form_error('phonebook_edit_name') : '';
             $errors['phonebook_phone_edit_error'] = form_error('phonebook_edit_phone') ? form_error('phonebook_edit_phone') : '';
             $errors['phonebook_address_edit_error'] = form_error('phonebook_edit_address') ? form_error('phonebook_edit_address') : '';
+            
 
             echo json_encode(['error' => $errors]);
         }
     }
 
-    function delete(){
-        $data=$this->p_model->delete_phonebook();
+    public function delete()
+    {
+        $data = $this->p_model->delete_phonebook();
         echo json_encode($data);
     }
-
 
 }

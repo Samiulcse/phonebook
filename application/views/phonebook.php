@@ -43,6 +43,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                <p class="text-center"><span class="error text-danger" id="common"></span></p>
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Name</label>
                         <div class="col-md-10">
@@ -94,6 +95,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                <p class="text-center"><span class="error text-danger" id="ecommon"></span></p>
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Name</label>
                         <div class="col-md-10">
@@ -227,6 +229,7 @@
                         $("#phonebook_name_error").html("");
                         $("#phonebook_phone_error").html("");
                         $("#phonebook_address_error").html("");
+                        $("#common").html("");
 
                         $('[name="phonebook_name"]').val("");
                         $('[name="phonebook_phone"]').val("");
@@ -243,6 +246,7 @@
                         $("#phonebook_name_error").html(data.error.phonebook_name_error);
                         $("#phonebook_phone_error").html(data.error.phonebook_phone_error);
                         $("#phonebook_address_error").html(data.error.phonebook_address_error);
+                        $("#common").html(data.error.common);
 
                         console.log(data.error);
                     }
@@ -281,6 +285,7 @@
                         $("#phonebook_name_edit_error").html("");
                         $("#phonebook_phone_edit_error").html("");
                         $("#phonebook_address_edit_error").html("");
+                        $("#ecommon").html("");
 
                         $('[name="phonebook_name_edit"]').val("");
                         $('[name="phonebook_id_edit"]').val("");
@@ -295,6 +300,7 @@
                         $("#phonebook_name_edit_error").html(data.error.phonebook_name_edit_error);
                         $("#phonebook_phone_edit_error").html(data.error.phonebook_phone_edit_error);
                         $("#phonebook_address_edit_error").html(data.error.phonebook_address_edit_error);
+                        $("#ecommon").html(data.error.common);
 
                         console.log(data.error);
                     }
