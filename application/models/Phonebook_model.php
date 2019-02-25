@@ -35,7 +35,7 @@ class Phonebook_model extends CI_Model
     public function searchForMatch($phone_number, $allData)
     {
         foreach ($allData as $key => $val) {
-            if ($val['phonebook_phone'] === $phone_number) {
+            if ($val['phonebook_phone'] == $phone_number) {
                 return true;
             }
         }

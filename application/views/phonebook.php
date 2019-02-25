@@ -1,7 +1,7 @@
 <div class="container">
     <!-- Page Heading -->
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 col-sm-12">
             <div class="col-md-12">
                 <h2><?php echo ucwords($this->session->userdata['user_name']) ?> Phonebook
                     <div class="float-right mb-30"><a href="<?php echo(base_url('login/logout')) ?>"
@@ -11,20 +11,22 @@
                 </h2>
             </div>
 
-            <table class="table table-striped" id="mydata">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>ID</th>
-                    <th>Phone Number</th>
-                    <th>Address</th>
-                    <th style="text-align: right;">Actions</th>
-                </tr>
-                </thead>
-                <tbody id="show_data">
+            <div class="table-responsive">
+                <table class="table table-striped" id="mydata">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>ID</th>
+                        <th>Phone Number</th>
+                        <th>Address</th>
+                        <th style="text-align: right;">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody id="show_data">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -55,7 +57,7 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Phone Number</label>
                         <div class="col-md-10">
-                            <input type="text" maxlength="10" id="phonebook_phone" class="form-control phonebook_phone"
+                            <input type="text" maxlength="11" id="phonebook_phone" class="form-control phonebook_phone"
                                    name="phonebook_phone" placeholder="Phone Number">
                             <span class="error text-danger" id="phonebook_phone_error"></span>
 
@@ -108,7 +110,7 @@
                     <div class="form-group row">
                         <label class="col-md-2 col-form-label">Phone Number</label>
                         <div class="col-md-10">
-                            <input type="text" name="phonebook_phone_edit" maxlength="10" id="phonebook_phone_edit"
+                            <input type="text" name="phonebook_phone_edit" maxlength="11" id="phonebook_phone_edit"
                                    class="form-control"
                                    placeholder="Phone Number">
                             <span class="error text-danger" id="phonebook_number_orr"></span>
@@ -165,6 +167,7 @@
 
         $('#mydata').dataTable(
             {
+                responsive: true,
                 "columnDefs": [
                     {
                         "targets": [1],

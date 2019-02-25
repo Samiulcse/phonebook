@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller
+class Login extends Admin_Controller
 {
 
     public function __construct()
@@ -9,6 +9,8 @@ class Login extends CI_Controller
         parent::__construct();
 
         $this->load->model('Login_model', 'auth_model', true);
+
+        $this->data['page_title'] = 'User Login and Registration';
 
         if ($this->uri->segment(2) == 'logout') {
             $this->logout();
@@ -26,13 +28,16 @@ class Login extends CI_Controller
         } 
     }
 
+       
+		
     public function index()
     {
-        $data['title'] = "User Login and Registration ";
+        $this->data['css'] =[
+            'style2'=>' <link rel="stylesheet" type="text/css" href="'.base_url() .'assets/auth/css/style2.css" />',
+            'animate-custom'=>' <link rel="stylesheet" type="text/css" href="'.base_url() .'assets/auth/css/animate-custom.css" />',
+        ];
 
-        $this->load->view('common/header', $data);
-        $this->load->view('auth/auth');
-        $this->load->view('common/footer');
+        $this->render_template('auth/auth', $this->data);
 
     }
 
